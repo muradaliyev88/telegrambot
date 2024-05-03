@@ -15,13 +15,47 @@ class bot_api:
         markup.row(btn_en_to_az)
         markup.row(btn_az_to_en)
         await bot.send_message(message.chat.id,"Salam başlamaq üçün birini seçin!", reply_markup=markup)
-        await bot.register_next_step_handler(message,onclick)
+        
+        #await markup.row(message,bot_api.onclick(message))
 
-    def onclick(message):
+    @bot.message_handler()
+    async def onclick(message):
         if message.text == "en>>az":
-            bot.send_message(message.chat.id, "English to Azerbaijani")
+            print(message.chat.first_name, message.chat.last_name, message.chat.username,   )
+            await bot.send_message(message.chat.id, "English to Azerbaijani")
         elif message.text == "az>>en":
-            bot.send_message(message.chat.id, "Azerbaijani to  English")
+            await bot.send_message(message.chat.id, "Azerbaijani to  English")
+        else:
+            print(message.chat.first_name, message.chat.last_name, message.chat.username, message.text)
+            await bot.send_message(message.chat.id, "nedir")
+
+import asyncio
+asyncio.run(bot.polling())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -55,5 +89,4 @@ async def echo_message(message):
     await bot.reply_to(message, message.text)
 
 """
-import asyncio
-asyncio.run(bot.polling())
+
